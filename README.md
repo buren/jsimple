@@ -1,4 +1,4 @@
-# Jsimple
+# Jsimple [![Build Status](https://travis-ci.org/buren/jsimple.svg?branch=master)](https://travis-ci.org/buren/jsimple) [![Code Climate](https://codeclimate.com/github/buren/jsimple/badges/gpa.svg)](https://codeclimate.com/github/buren/jsimple)
 
 Easy integration between (legacy) Rails apps, and JavaScript.
 
