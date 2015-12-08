@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Jacob Burenstam']
   spec.email         = ['burenstam@gmail.com']
 
-  spec.summary       = %q{TODO: Write a short summary, because Rubygems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
+  spec.summary       = %q{Easy integration between (legacy) Rails apps, and JavaScript.}
+  spec.description   = %q{Easy integration between (legacy) Rails apps, and JavaScript, the gem has makes few assumptions and has almost no dependencies.}
   spec.homepage      = 'https://github.com/buren/jsimple'
   spec.license       = 'MIT'
 
@@ -24,4 +24,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler', '~> 1.10'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'simplecov'
 end

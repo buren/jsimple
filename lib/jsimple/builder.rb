@@ -12,7 +12,7 @@ module Jsimple
     end
 
     def self.js_path(name)
-      if development_mode?
+      if Jsimple.development
         js_development_path(name, Jsimple.host, Jsimple.port)
       else
         js_production_path(name)
@@ -36,11 +36,6 @@ module Jsimple
     # Path for JS in development
     def self.js_development_path(name, host, port)
       "http://#{host}:#{port}/#{name}.js"
-    end
-
-    # Are we in development mode?
-    def self.development_mode?
-      Jsimple.development
     end
   end
 end

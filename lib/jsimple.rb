@@ -10,10 +10,14 @@ module Jsimple
   end
 
   # Config
-  @host = 'localhost'
-  @port = '3100'
-  @development = defined?(Rails) ? Rails.env.development? : false
-  @js_start_command = 'start'
+  DEFAULT_HOST = 'localhost'
+  DEFAULT_PORT = '3100'
+  DEFAULT_DEVELOPMENT = defined?(Rails) ? Rails.env.development? : false
+  DEFAULT_JS_START_COMMAND = 'start'
+  @host = DEFAULT_HOST
+  @port = DEFAULT_PORT
+  @development = DEFAULT_DEVELOPMENT
+  @js_start_command = DEFAULT_JS_START_COMMAND
 
   def self.host=(host)
     HotReloadProxy::Proxy.foreign_host = host
@@ -47,5 +51,12 @@ module Jsimple
 
   def self.js_start_command
     @js_start_command
+  end
+
+  def self.reset!
+    @host = DEFAULT_HOST
+    @port = DEFAULT_PORT
+    @development = DEFAULT_DEVELOPMENT
+    @js_start_command = DEFAULT_JS_START_COMMAND
   end
 end
