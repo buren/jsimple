@@ -18,10 +18,33 @@ Or install it yourself as:
 
     $ gem install jsimple
 
+## Configure
+
+In order to have this make sense with your current setup you probably want to configure some of the defaults.
+
+__Host__: `Jsimple.host = 'localhost'`
+Server host for the JS client (usually Node) in development mode. Default is localhost.
+
+__Port__: `Jsimple.port = '3100'`
+Server port for the JS client (usually Node) in development mode. Default is 3100.
+
+__Development__: `Jsimple.development = false`
+Whether to start Jsimple in development mode. Default is `Rails.env.development?` otherwise false.
+
+__Js_start_command__: `Jsimple.js_start_command = 'start'`
+JS function name the legacy app will call to initialize the JS app.
+
 ## Usage
 
 ```ruby
-app = Jsimple.app('ContactList', props: [{name: 'Alice'}, {name: 'Bob'}], id: nil)
+data = {name: 'Alice', age: 26}
+app = Jsimple.app('ContactList', props: data, id: 'contact-list-id')
+app.path
+# => jsimple/test_app.min.js
+app.init
+# => <script>
+#      test_app.start(document.getElementById('contact-list-id'), JSON.parse('{"name": "Alice", "age": 26}'));
+#    </script>
 ```
 
 ## Development

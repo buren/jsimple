@@ -1,6 +1,7 @@
 require 'jsimple/version'
 
 require 'jsimple/builder'
+require 'jsimple/railtie' if defined?(Rails)
 
 require 'hot_reload_proxy'
 
@@ -20,12 +21,12 @@ module Jsimple
   @js_start_command = DEFAULT_JS_START_COMMAND
 
   def self.host=(host)
-    HotReloadProxy::Proxy.foreign_host = host
+    HotReloadProxy::Proxy.host = host
     @host = host
   end
 
   def self.port=(port)
-    HotReloadProxy::Proxy.foreign_port = port
+    HotReloadProxy::Proxy.port = port
     @port = port
   end
 
