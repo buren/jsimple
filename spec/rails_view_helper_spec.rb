@@ -1,9 +1,17 @@
 require 'spec_helper'
+require 'ostruct'
 
-describe Jsimple::ViewHelper do
+require 'jsimple/rails_view_helper'
+
+describe Jsimple::RailsViewHelper do
+  class String
+    def html_safe
+      self
+    end
+  end
   describe '#app' do
     class MyViewHelperTester
-      include Jsimple::ViewHelper
+      include Jsimple::RailsViewHelper
     end
 
     it 'returns Jsimple#app result' do

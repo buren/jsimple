@@ -21,12 +21,12 @@ module Jsimple
   @js_start_command = DEFAULT_JS_START_COMMAND
 
   def self.host=(host)
-    HotReloadProxy::Proxy.host = host
+    HotReloadProxy::Config.host = host
     @host = host
   end
 
   def self.port=(port)
-    HotReloadProxy::Proxy.port = port
+    HotReloadProxy::Config.port = port
     @port = port
   end
 
