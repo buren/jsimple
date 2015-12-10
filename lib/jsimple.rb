@@ -10,6 +10,14 @@ module Jsimple
     Builder.app_factory(name, props, id)
   end
 
+  def self.path(*args)
+    app(*args).path
+  end
+
+  def self.init(*args)
+    app(*args).init
+  end
+
   # Config
   DEFAULT_HOST = 'localhost'
   DEFAULT_PORT = '3100'

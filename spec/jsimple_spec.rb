@@ -5,13 +5,23 @@ describe Jsimple do
     expect(described_class::VERSION).not_to be nil
   end
 
-  describe '#app' do
-    it 'returns object with #path method' do
-      expect(described_class.app('').respond_to?(:path)).to eq(true)
+  describe 'class methods' do
+    describe '#app' do
+      it 'returns object with #path method' do
+        expect(described_class.app('').respond_to?(:path)).to eq(true)
+      end
+
+      it 'returns object with #init method' do
+        expect(described_class.app('').respond_to?(:init)).to eq(true)
+      end
     end
 
-    it 'returns object with #init method' do
-      expect(described_class.app('').respond_to?(:init)).to eq(true)
+    it '#init is defined' do
+      expect(described_class.respond_to?(:init)).to eq(true)
+    end
+
+    it '#path is defined' do
+      expect(described_class.respond_to?(:path)).to eq(true)
     end
   end
 
