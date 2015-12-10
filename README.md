@@ -22,17 +22,50 @@ Or install it yourself as:
 
 In order to have this make sense with your current setup you probably want to configure some of the defaults.
 
-__Host__: `Jsimple.host = 'localhost'`
+Below are all of the available configuration values and their defaults.
+
+__Host__:
+
+```ruby
+Jsimple.host = 'localhost'
+```
 Server host for the JS client (usually Node) in development mode. Default is localhost.
 
-__Port__: `Jsimple.port = '3100'`
+__Port__:
+
+```ruby
+Jsimple.port = '3100'
+```
 Server port for the JS client (usually Node) in development mode. Default is 3100.
 
-__Development__: `Jsimple.development = false`
-Whether to start Jsimple in development mode. Default is `Rails.env.development?` otherwise false.
+__Development__:
 
-__Js_start_command__: `Jsimple.js_start_command = 'start'`
+```ruby
+Jsimple.development = false
+```
+Whether to start Jsimple in development mode. The default is false unless your running Rails then `Rails.env.development?` is the default.
+
+__JS start command__:
+
+```ruby
+Jsimple.js_start_command = 'start'
+```
 JS function name the legacy app will call to initialize the JS app.
+
+__JS path prefix__:
+
+```ruby
+Jsimple.js_path_prefix = 'jsimple'
+```
+JS path prefix to prepend to the app name in production.
+
+__JS dev path prefix__:
+
+```ruby
+Jsimple.js_dev_path_prefix = ''
+```
+JS path prefix to prepend to the app name in development.
+
 
 ## Usage
 
@@ -40,11 +73,33 @@ JS function name the legacy app will call to initialize the JS app.
 data = {name: 'Alice', age: 26}
 app = Jsimple.app('ContactList', props: data, id: 'contact-list-id')
 app.path
-# => jsimple/test_app.min.js
+# In production
+#   => jsimple/test_app.min.js
+# In development
+#   => http://localhost:3100/test_app.min.js
 app.init
 # => <script>
 #      test_app.start(document.getElementById('contact-list-id'), JSON.parse('{"name": "Alice", "age": 26}'));
 #    </script>
+```
+
+:warning: _Security note_: XSS is possible if a user is allowed to set arbitrary values to `name` and `id`. `props` is serialized to JSON and should therefore be safe.
+
+#### Rails integration
+
+If your using Rails you get a couple of helper methods are included.
+
+Example
+```
+<%= javascript_indlude_tag jsimple_js_path('js_app_name') %>
+<%= jsimle_js_init('js_app_name') %>
+```
+
+You will need to add the production js bundles to your path.
+
+```ruby
+# config/initializers/assets.rb
+Rails.application.config.assets.precompile += %w( jsimple/* )
 ```
 
 ## Development
@@ -55,7 +110,7 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 
 ## Contributing
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/jsimple. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
+Bug reports and pull requests are welcome on GitHub at https://github.com/buren/jsimple. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](contributor-covenant.org) code of conduct.
 
 ## License
 

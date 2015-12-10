@@ -26,7 +26,7 @@ describe Jsimple do
   end
 
   describe 'config' do
-    after(:each) { described_class.reset! }
+    before(:each) { described_class.reset! }
 
     describe 'default value' do
       it 'is defined for host' do
@@ -43,6 +43,14 @@ describe Jsimple do
 
       it 'is defined for js_start_command' do
         expect(described_class.js_start_command).to eq('start')
+      end
+
+      it 'is defined for js_path_prefix' do
+        expect(described_class.js_path_prefix).to eq('jsimple')
+      end
+
+      it 'is defined for js_dev_path_prefix' do
+        expect(described_class.js_dev_path_prefix).to eq('')
       end
     end
 
@@ -68,6 +76,18 @@ describe Jsimple do
       js_start_command = 'startMe'
       described_class.js_start_command = js_start_command
       expect(described_class.js_start_command).to eq(js_start_command)
+    end
+
+    it 'can configure js_path_prefix' do
+      js_path_prefix = 'my-special-prefix'
+      described_class.js_path_prefix = js_path_prefix
+      expect(described_class.js_path_prefix).to eq(js_path_prefix)
+    end
+
+    it 'can configure js_dev_path_prefix' do
+      js_dev_path_prefix = 'my-special-prefix'
+      described_class.js_dev_path_prefix = js_dev_path_prefix
+      expect(described_class.js_dev_path_prefix).to eq(js_dev_path_prefix)
     end
   end
 end

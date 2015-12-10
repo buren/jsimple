@@ -35,13 +35,43 @@ describe Jsimple::Builder do
   end
 
   describe '#js_path' do
-    it 'can generate production path' do
-      expect(described_class.js_path('test_app')).to eq('jsimple/test_app.min.js')
+    describe 'production' do
+      it 'generates correct path' do
+        expect(described_class.js_path('test_app')).to eq('jsimple/test_app.min.js')
+      end
+
+      it 'generates correct path with custom prefix' do
+        Jsimple.js_path_prefix = 'my-special-prefix'
+        expect(described_class.js_path('test_app')).to eq('my-special-prefix/test_app.min.js')
+      end
+
+      it 'generates correct path with empty prefix' do
+        Jsimple.js_path_prefix = ''
+        expected_path = 'test_app.min.js'
+        expect(described_class.js_path('test_app')).to eq(expected_path)
+      end
     end
 
-    it 'can generate development path' do
-      Jsimple.development = true
-      expect(described_class.js_path('test_app')).to eq('http://localhost:3100/test_app.js')
+    describe 'development' do
+      before(:each) do
+        Jsimple.development = true
+      end
+
+      it 'generates correct path' do
+        expect(described_class.js_path('test_app')).to eq('http://localhost:3100/test_app.js')
+      end
+
+      it 'generates correct path with custom prefix' do
+        Jsimple.js_dev_path_prefix = 'my-special-prefix'
+        expected_path = 'http://localhost:3100/my-special-prefix/test_app.js'
+        expect(described_class.js_path('test_app')).to eq(expected_path)
+      end
+
+      it 'generates correct path with empty prefix' do
+        Jsimple.js_dev_path_prefix = ''
+        expected_path = 'http://localhost:3100/test_app.js'
+        expect(described_class.js_path('test_app')).to eq(expected_path)
+      end
     end
   end
 

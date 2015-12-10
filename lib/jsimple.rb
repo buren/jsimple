@@ -23,10 +23,14 @@ module Jsimple
   DEFAULT_PORT = '3100'
   DEFAULT_DEVELOPMENT = defined?(Rails) ? Rails.env.development? : false
   DEFAULT_JS_START_COMMAND = 'start'
+  DEFAULT_JS_PATH_PREFIX = 'jsimple'
+  DEFAULT_JS_DEV_PATH_PREFIX = ''
   @host = DEFAULT_HOST
   @port = DEFAULT_PORT
   @development = DEFAULT_DEVELOPMENT
   @js_start_command = DEFAULT_JS_START_COMMAND
+  @js_path_prefix = DEFAULT_JS_PATH_PREFIX
+  @js_dev_path_prefix = DEFAULT_JS_DEV_PATH_PREFIX
 
   def self.host=(host)
     HotReloadProxy::Config.host = host
@@ -46,6 +50,14 @@ module Jsimple
     @js_start_command = js_start_command
   end
 
+  def self.js_path_prefix=(js_path_prefix)
+    @js_path_prefix = js_path_prefix
+  end
+
+  def self.js_dev_path_prefix=(js_dev_path_prefix)
+    @js_dev_path_prefix = js_dev_path_prefix
+  end
+
   def self.host
     @host
   end
@@ -62,10 +74,20 @@ module Jsimple
     @js_start_command
   end
 
+  def self.js_path_prefix
+    @js_path_prefix
+  end
+
+  def self.js_dev_path_prefix
+    @js_dev_path_prefix
+  end
+
   def self.reset!
     @host = DEFAULT_HOST
     @port = DEFAULT_PORT
     @development = DEFAULT_DEVELOPMENT
     @js_start_command = DEFAULT_JS_START_COMMAND
+    @js_path_prefix = DEFAULT_JS_PATH_PREFIX
+    @js_dev_path_prefix = DEFAULT_JS_DEV_PATH_PREFIX
   end
 end

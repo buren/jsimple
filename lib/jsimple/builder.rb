@@ -30,12 +30,19 @@ module Jsimple
 
     # Path for JS bundle in production
     def self.js_production_path(name)
-      "jsimple/#{name}.min.js"
+      _path_join(Jsimple.js_path_prefix, "#{name}.min.js")
     end
 
     # Path for JS in development
     def self.js_development_path(name, host, port)
-      "http://#{host}:#{port}/#{name}.js"
+      path = _path_join(Jsimple.js_dev_path_prefix, "#{name}.js")
+      "http://#{host}:#{port}/#{path}"
+    end
+
+    # private
+
+    def self._path_join(path, file_name)
+      [path, file_name].reject(&:empty?).join('/')
     end
   end
 end
